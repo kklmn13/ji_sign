@@ -19,6 +19,7 @@ func init()  {
 }
 
 func main() {
+	signall()
 	c := cron.New()
 	c.AddFunc("0 * * * * ?", func() {
 		timeNow:=time.Now()
@@ -27,20 +28,34 @@ func main() {
 	})
 	c.AddFunc("0 0 9 * * ?", func() {
 		fmt.Print("每天9:00签到")
-		sign()
+		signall()
 	})
 	c.Start()
 	select {}
 }
+
+func signall(){
+	if (len(util.AppConfig.GetString("email1") != 0){
+		sign(util.AppConfig.GetString("email1"), util.AppConfig.GetString("passwd1"))
+	}
+	if (len(util.AppConfig.GetString("email2") != 0){
+		sign(util.AppConfig.GetString("email2"), util.AppConfig.GetString("passwd2"))
+	}
+	if (len(util.AppConfig.GetString("email3") != 0){
+		sign(util.AppConfig.GetString("email3"), util.AppConfig.GetString("passwd3"))
+	}
+}
+
 //登录并签到
-func sign()  {
+func sign(a_email, a_passwd string)  {
 	// create a new collector
+	v_url := util.AppConfig.GetString("url")
 	c := colly.NewCollector(
 		colly.AllowedDomains("j05.space"),
 	)
 
 	// authenticate
-	err := c.Post("https://j05.space/signin", map[string]string{"email": util.AppConfig.GetString("email"), "passwd": util.AppConfig.GetString("passwd")})
+	err := c.Post(v_url + "/signin", map[string]string{"email": a_email, "passwd": a_passwd})
 	if err != nil {
 		log.Fatal(err)
 		util.Log(err.Error())
@@ -51,9 +66,9 @@ func sign()  {
 		util.Log("response revice :"+string(r.Body))
 
 	})
-	c.Visit("https://j05.space/xiaoma/get_user")
+	c.Visit(v_url + "/xiaoma/get_user")
 	//签到
-	err = c.Post("https://j05.space/user/checkin", map[string]string{})
+	err = c.Post(v_url + "/user/checkin", map[string]string{})
 	if err != nil {
 		log.Fatal(err)
 		util.Log(err.Error())
