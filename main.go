@@ -36,11 +36,11 @@ func main() {
 func sign()  {
 	// create a new collector
 	c := colly.NewCollector(
-		colly.AllowedDomains("ji-bt.pw"),
+		colly.AllowedDomains("j05.space"),
 	)
 
 	// authenticate
-	err := c.Post("https://ji-bt.pw/signin", map[string]string{"email": util.AppConfig.GetString("email"), "passwd": util.AppConfig.GetString("passwd")})
+	err := c.Post("https://j05.space/signin", map[string]string{"email": util.AppConfig.GetString("email"), "passwd": util.AppConfig.GetString("passwd")})
 	if err != nil {
 		log.Fatal(err)
 		util.Log(err.Error())
@@ -51,9 +51,9 @@ func sign()  {
 		util.Log("response revice :"+string(r.Body))
 
 	})
-	c.Visit("https://ji-bt.pw/xiaoma/get_user")
+	c.Visit("https://j05.space/xiaoma/get_user")
 	//签到
-	err = c.Post("https://ji-bt.pw/user/checkin", map[string]string{})
+	err = c.Post("https://j05.space/user/checkin", map[string]string{})
 	if err != nil {
 		log.Fatal(err)
 		util.Log(err.Error())
