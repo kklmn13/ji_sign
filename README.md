@@ -13,7 +13,7 @@
 #### 使用源码编译方式
 
 ```
-1. git clone https://github.com/yingfu9218/ji_sign.git
+1. git clone https://github.com/kklmn13/ji_sign.git
 2. cd ji_sign
 3. 编译 go build -o sign main.go 得到sign 执行文件
 4. 修改 config.yaml中的账号密码
