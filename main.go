@@ -35,13 +35,13 @@ func main() {
 }
 
 func signall(){
-	if (len(util.AppConfig.GetString("email1") != 0){
+	if (len(util.AppConfig.GetString("email1")) != 0) {
 		sign(util.AppConfig.GetString("email1"), util.AppConfig.GetString("passwd1"))
 	}
-	if (len(util.AppConfig.GetString("email2") != 0){
+	if (len(util.AppConfig.GetString("email2")) != 0) {
 		sign(util.AppConfig.GetString("email2"), util.AppConfig.GetString("passwd2"))
 	}
-	if (len(util.AppConfig.GetString("email3") != 0){
+	if (len(util.AppConfig.GetString("email3")) != 0) {
 		sign(util.AppConfig.GetString("email3"), util.AppConfig.GetString("passwd3"))
 	}
 }
