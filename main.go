@@ -63,8 +63,9 @@ func signall(){
 func sign(a_email, a_passwd string)  {
 	// create a new collector
 	v_url := util.AppConfig.GetString("url")
+	v_allowdomains := util.AppConfig.GetString("allowdomains")
 	c := colly.NewCollector(
-		colly.AllowedDomains("j05.space"),
+		colly.AllowedDomains(v_allowdomains),
 	)
 
 	// authenticate
